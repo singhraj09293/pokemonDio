@@ -21,7 +21,7 @@ class PokemonRepository {
       final String image =
           'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$id.png';
       pokemons.add(Pokemon(id: id, name: name, image: image));
-      print(pokemons);
+    
     }
     return pokemons;
   }
