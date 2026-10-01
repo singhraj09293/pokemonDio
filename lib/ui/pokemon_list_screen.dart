@@ -17,6 +17,7 @@ class _PokemonListScreenState extends State<PokemonListScreen> {
   List<Pokemon> pokemon = [];
   int offset = 0;
   bool isLoadingMore = false;
+  bool hasMore = true;
   final ScrollController controller = ScrollController();
   @override
   void initState() {
@@ -60,7 +61,7 @@ class _PokemonListScreenState extends State<PokemonListScreen> {
   }
 
   Future<void> _loadMore() async {
-    if (isLoadingMore) return;
+    if (isLoadingMore || !hasMore) return;
     isLoadingMore = true;
     setState(() {
       isLoading = false;
@@ -68,9 +69,13 @@ class _PokemonListScreenState extends State<PokemonListScreen> {
     });
     try {
       final result = await widget.repository.getPokemonList(20, offset);
+
       setState(() {
         pokemon.addAll(result);
         offset += 20;
+        if (result.length < 20) {
+          hasMore = false;
+        }
       });
     } on DioException catch (e) {
       setState(() {
