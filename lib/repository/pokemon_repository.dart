@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:pokemon_dio/models/pokemon.dart';
+import 'package:pokemon_dio/models/pokemon_detail.dart';
 
 class PokemonRepository {
   final Dio dio;
@@ -21,8 +22,12 @@ class PokemonRepository {
       final String image =
           'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$id.png';
       pokemons.add(Pokemon(id: id, name: name, image: image));
-    
     }
     return pokemons;
+  }
+
+  Future<PokemonDetail> getPokemonDetail(int id) async {
+    final response = await dio.get('/pokemon/$id');
+    return PokemonDetail.fromMap(response.data);  //PokemonDetail.fromMap(response.data) store the reponse.data only what pokemonDetail wants
   }
 }
