@@ -149,6 +149,9 @@ class _PokemonListScreenState extends State<PokemonListScreen> {
       );
     } else {
       return Scaffold(
+        appBar: AppBar(
+          title: Text('Pokedex', style: TextStyle(fontWeight: FontWeight.bold)),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
