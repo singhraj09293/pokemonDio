@@ -69,7 +69,6 @@ class _PokemonListScreenState extends State<PokemonListScreen> {
     });
     try {
       final result = await widget.repository.getPokemonList(20, offset);
-
       setState(() {
         pokemon.addAll(result);
         offset += 20;
