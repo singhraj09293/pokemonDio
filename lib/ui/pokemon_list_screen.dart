@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:pokemon_dio/models/pokemon.dart';
 import 'package:pokemon_dio/repository/pokemon_repository.dart';
+import 'package:pokemon_dio/ui/pokemon_detail_screen.dart';
 
 class PokemonListScreen extends StatefulWidget {
   final PokemonRepository repository;
@@ -131,6 +132,15 @@ class _PokemonListScreenState extends State<PokemonListScreen> {
                       leading: Image.network(pok.image),
                       title: Text(pok.name),
                       trailing: Text(pok.id.toString()),
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => PokemonDetailScreen(
+                            repository: widget.repository,
+                            id: pok.id,
+                          ),
+                        ),
+                      ),
                     ),
                   );
                 }),
